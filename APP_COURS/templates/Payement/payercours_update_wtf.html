@@ -1,0 +1,121 @@
+{% extends "base.html" %}
+{% block title %} Modifier Le Paiement du membre {% endblock %}
+{% block head %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+{% endblock %}
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Modifier Le Paiement du membre</h2>
+            <form action="" method="POST" novalidate>
+                {{ form_update.hidden_tag() }}
+                <table class="table table-bordered">
+                    <thead class="thead-light">
+                        <tr>
+                            <th colspan="2" class="text-center">Informations de l'étudiant</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th>Nom Prénom</th>
+                            <td>{{ form_update.personne_wtf(class="control") }}</td>
+                        </tr>
+                        <tr>
+                            <th>Titre Cours</th>
+                            <td>
+                                {{ form_update.fk_inscrirecours_display(class="control") }}
+                                {{ form_update.fk_inscrirecours_hidden }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Montant principal du cours</th>
+                            <td>{{ form_update.montant_principal(class="control") }}</td>
+                        </tr>
+                        <tr>
+                            <th>{{ form_update.rabais_updatewtf.label }}</th>
+                            <td>{{ form_update.rabais_updatewtf(class="control") }}</td>
+                        </tr>
+                        <tr>
+                            <th>{{ form_update.montant_paye_updatewtf.label }}</th>
+                            <td>{{ form_update.montant_paye_updatewtf(class="control") }}</td>
+                        </tr>
+                        <tr>
+                            <th>{{ form_update.mode_paiement_updatewtf.label }}</th>
+                            <td>{{ form_update.mode_paiement_updatewtf(class="control") }}</td>
+                        </tr>
+                        <tr>
+                            <th>{{ form_update.statut_updatewtf.label }}</th>
+                            <td>{{ form_update.statut_updatewtf(class="control") }}</td>
+                        </tr>
+                        <tr>
+                            <th>{{ form_update.description_rabais_updatewtf.label }}</th>
+                            <td>{{ form_update.description_rabais_updatewtf(class="control") }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                {% for error in form_update.rabais_updatewtf.errors %}
+                    <div class="btn btn-warning">{{ error }}</div>
+                {% endfor %}
+                {% for error in form_update.montant_paye_updatewtf.errors %}
+                    <div class="btn btn-warning">{{ error }}</div>
+                {% endfor %}
+                {% for error in form_update.mode_paiement_updatewtf.errors %}
+                    <div class="btn btn-warning">{{ error }}</div>
+                {% endfor %}
+                {% for error in form_update.description_rabais_updatewtf.errors %}
+                    <div class="btn btn-warning">{{ error }}</div>
+                {% endfor %}
+                <div class="text-right">
+                    <button type="submit" class="btn btn-info">Mettre à jour</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block javascript %}
+<script>
+$(document).ready(function() {
+    $('#personne_wtf').change(function() {
+        var personneId = $(this).val();
+        $.ajax({
+            url: "{{ url_for('charger_cours') }}",
+            method: "GET",
+            data: { personne_id: personneId },
+            success: function(cours) {
+                var select = $('#cours_wtf');
+                select.empty();
+                if (cours.length > 0) {
+                    cours.forEach(function(course) {
+                        select.append($('<option>', {
+                            value: course.id,
+                            text: course.titre,
+                            'data-prix': course.prix
+                        }));
+                    });
+                    // Déclencher l'événement change pour mettre à jour le montant principal
+                    select.trigger('change');
+                } else {
+                    select.append($('<option>').attr('value', '').text('Aucun cours disponible'));
+                    $('#montant_principal_wtf').val('');
+                }
+            },
+            error: function(xhr, status, error) {
+                console.log("Erreur lors du chargement des cours : " + error);
+                select.append($('<option>').attr('value', '').text('Erreur de chargement'));
+                $('#montant_principal_wtf').val('Erreur de chargement');
+            }
+        });
+    });
+
+    $('#cours_wtf').change(function() {
+        var prix = $(this).find('option:selected').data('prix');
+        $('#montant_principal_wtf').val(prix);
+    });
+
+    // Déclencher l'événement change au chargement de la page pour initialiser les valeurs
+    $('#personne_wtf').trigger('change');
+});
+</script>
+{% endblock %}

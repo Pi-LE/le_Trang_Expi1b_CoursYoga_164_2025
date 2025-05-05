@@ -1,0 +1,112 @@
+<!-- modifier-->
+{% extends "base.html" %}
+{% block title %} Modifier Personnes et Fonctions {% endblock %}
+{% block head %}
+    <!-- Ressources pour tags-selector-tagselect -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='tags-selector-tagselect/jquery.tagselect.css') }}">
+    <script src="{{ url_for('static', filename='tags-selector-tagselect/jquery.tagselect.js') }}"></script>
+{% endblock %}
+{% block body %}
+<style>
+    ol, ul, li {
+        list-style: none;
+    }
+</style>
+
+<div class="container">
+    <div class="col-md-12">
+        <h2>Membres et Fonctions</h2>
+        <table class="table table-bordered table-sm">
+            {% if data_personne_selected %}
+                <thead>
+                    <tr class ="btn-user">
+                        <th>ID</th>
+                        <th>Nom</th>
+                        <th>Prénom</th>
+                        <th>Date de Naissance</th>
+                        <th>Numéro AVS</th>
+                        <th>Sexe</th>
+                        <th>Début Fonction</th>
+                        <th>Fin Fonction</th>
+                    </tr>
+                </thead>
+                {% for row in data_personne_selected %}
+                <tbody>
+                    <tr class ="btn-user1">
+                        <td class="align-middle">{{ row.Id_personne }}</td>
+                        <td class="align-middle">{{ row.Nom }}</td>
+                        <td class="align-middle">{{ row.Prenom }}</td>
+                        <td class="align-middle">{{ row.Date_naissance }}</td>
+                        <td class="align-middle">{{ row.NumeroAVS }}</td>
+                        <td class="align-middle">{{ row.Sexe }}</td>
+                        <td class="align-middle">{{ row.Dates_debut if row.Dates_debut else "Non spécifié"}}</td>
+                        <td class="align-middle">{{ row.Dates_fin|default("Non spécifié", True) }}</td>
+                    </tr>
+                </tbody>
+                {% else %}
+                <tbody>
+                    <tr>
+                        <td colspan="7">Aucune personne sélectionnée ou n'existe pas.</td>
+                    </tr>
+                </tbody>
+                {% endfor %}
+            {% endif %}
+        </table>
+    </div>
+</div>
+<div class="container">
+    <div class="row mx-md-n5">
+         <form id="form_tags_select_confirm" action="{{ url_for('update_personne_fonction_selected') }}" method="POST">
+            <div class="col px-md-5">
+                <div class="p-3">
+                        <!-- Ajouter les champs de date ici -->
+                    {{ form.hidden_tag() }}
+                        <!-- Champs dynamiques pour les dates -->
+                        <!-- Champ pour la date de début -->
+                        {{ form.date_debut.label }}<br>
+                        {{ form.date_debut(size=32) }}<br>
+                        {% for error in form.date_debut.errors %}
+                            <span style="color: red;">[{{ error }}]</span>
+                        {% endfor %}<br>
+
+                        <!-- Champ pour la date de fin -->
+                        {{ form.date_fin.label }}<br>
+                        {{ form.date_fin(size=32) }}<br>
+                        {% for error in form.date_fin.errors %}
+                            <span style="color: red;">[{{ error }}]</span>
+                        {% endfor %}<br>
+
+                        <div class="qtagselect isw360">
+                        <select id="OM_JTSD" name="name_select_tags" class="qtagselect__select" multiple>
+                            {% for row in data_fonctions_non_attribues %}
+                                <option value="{{ row.ID_Fonction }}" name="name_tags_non_attribues_html" class="isblue">{{ row.Type_fonction }}</option>
+                            {% endfor %}
+                            {% for row in data_fonctions_attribues %}
+                                <option value="{{ row.ID_Fonction }}" name="name_tags_attribues_html" class="ispurple" selected>{{ row.Type_fonction }}</option>
+                            {% endfor %}
+                        </select>
+                        </div>
+                </div>
+            </div>
+            <div class="col px-md-5">
+                <div class="btn">
+                    <input type="submit" form="form_tags_select_confirm" class="btn btn-info" value="Modifier">
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block javascript %}
+<script>
+    $(document).ready(function () {
+        $('.qtagselect__select').tagselect({
+            'maxTag': 100,
+            'tagMessage': '100 tags au max !'
+        });
+    });
+</script>
+{% endblock %}
+

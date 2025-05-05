@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block title %} Modifier Un Horaire {% endblock %}
+{% block body %}
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+            <h2>
+                Modifier Un Horaire
+            </h2><br>
+			<form action="" method="POST" novalidate>
+				<!-- Protection contre les attaques Cross-Site Request Forgery (CSRF) -->
+				 {{ form_update.hidden_tag() }}
+                <div class="form-group">
+                    <p>
+                        {{ form_update.date_cours_Uwtf.label }}<br>
+                        {{ form_update.date_cours_Uwtf(size=32) }}<br>
+                        {% for error in form_update.date_cours_Uwtf.errors %}
+                            <span style="color: red;">[{{ error }}]</span>
+                        {% endfor %}
+                    </p>
+                    <p>
+                        {{ form_update.jour_semaine_Uwtf.label }}<br>
+                        {{ form_update.jour_semaine_Uwtf(class="form-control") }}<br>
+                        {% for error in form_update.jour_semaine_Uwtf.errors %}
+                            <span style="color: red;">[{{ error }}]</span>
+                        {% endfor %}
+                    </p>
+                    <p>
+                        {{ form_update.heure_debut_Uwtf.label }}<br>
+                        {{ form_update.heure_debut_Uwtf(size=32) }}<br>
+                        {% for error in form_update.heure_debut_Uwtf.errors %}
+                            <span style="color: red;">[{{ error }}]</span>
+                        {% endfor %}
+                    </p>
+                    <p>
+                        {{ form_update.heure_fin_Uwtf.label }}<br>
+                        {{ form_update.heure_fin_Uwtf(size=32) }}<br>
+                        {% for error in form_update.heure_fin_Uwtf.errors %}
+                            <span style="color: red;">[{{ error }}]</span>
+                        {% endfor %}
+                    </p>
+                </div>
+                {{ form_update.submit(class="btn btn-info") }}
+            </form>
+		</div>
+	</div>
+</div>
+{% endblock %}
+

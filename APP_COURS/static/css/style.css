@@ -1,0 +1,670 @@
+/* Importation de Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+
+
+/* Styles généraux */
+
+body {
+background-color: #daf7ff !important;
+}
+
+/* Banner */
+.header-banner {
+    background-image: url('/static/images/cover.png')!important;
+    background-size: cover;
+    padding: 5px;
+    color: green;
+    border-radius: 10px;
+    font-family:  'Tangerine', cursive !important;
+    font-weight: bold; /* Tente de demander le poids "bold", si disponible */
+    text-shadow: 1px 1px 0px #69ee95; /* Ajoute un effet d'ombre pour renforcer le texte */
+    margin-bottom: 0; /* pas d'espace supplémentaire en dessous */
+}
+
+
+.header-banner .top-title {
+    font-size: 70px; /* Taille de la partie supérieure du titre */
+    text-align: right;
+}
+
+
+.header-banner .bottom-title {
+    font-size: 60px; /* Taille de la partie inférieure du titre */
+    text-align: right;
+}
+
+
+
+/* navigation */
+.navbar {
+border-radius: 10px !important;}
+
+/* Effet de survol pour la barre de navigation */
+.navbar:hover {
+    background-color: #5cb85c; /* Change la couleur de fond au survol */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Ajoute une légère ombre pour la profondeur */
+
+}
+.navbar a { /* Ciblez les liens à l'intérieur de la barre de navigation */
+    text-transform: uppercase; /* Transforme le texte en majuscules */
+
+}
+
+/* Assurez-vous que la barre de navigation a une marge nulle ou minimale en bas */
+.navbar {
+    margin-bottom: 0; /* Enlever ou réduire la marge inférieure */
+}
+
+/* Si votre barre de navigation est un autre élément, ajustez-le également */
+.navbar-custom {
+    margin-bottom: 0; /* Enlever ou réduire la marge inférieure */
+}
+
+/* Ajustez la marge de votre div contenant le contenu */
+.container-fluid {
+    padding-top: 0; /* Réduire le padding supérieur si nécessaire */
+}
+
+/* text */
+
+
+
+
+h2 {
+font-family: 'Papyrus', fantasy ! important;
+font-size: 30px !important;
+color:  #1ea018 !important; /* blue+green */
+text-shadow: 1px 1px 0px  #addb87!important;
+
+}
+h2 {
+    margin-top: 0px; /* Ajustez cette valeur selon vos besoins */
+    margin-bottom: 0px; /* Ajustez cette valeur selon vos besoins */
+}
+h3{
+font-family:  'Roboto', sans-serif! important;
+color: #3e68b9! important; /* blue */
+font-size: 25px ! important;
+}
+
+h4 {
+font-family: 'Tangerine' !important;
+font-size: 30px !important;
+color:  #2aa198 !important; /* blue+green */
+text-shadow: 1px 1px 0px  #59f5f1!important;
+}
+h5{
+ font-family: 'Ariel',cursive! important;
+ color: #3299b7 !important;/* orange */
+ font-size: 18px ! important;
+}
+
+h6 {
+font-family: 'Papyrus', fantasy ! important;
+font-size: 18px !important;
+color:  #26d24d ; /* green */
+font-weight: bold ;
+}
+
+h7 {
+font-family: 'Papyrus', fantasy ;
+font-size: 15px ;
+color:  #d33682c4 ; /* rose */
+font-weight: bold ;
+}
+
+
+h8 {
+font-family: 'Papyrus', fantasy ;
+font-size: 15px ;
+color:  #6610f2 ;
+font-weight: bold ;
+}
+
+h9{
+ font-family: 'Ariel',cursive;
+ color: #26d24d;
+ font-size: 16px ;
+}
+h10 {
+font-family: 'Papyrus', fantasy ;
+font-size: 12px ;
+color:  #1ea858 ; /* green neutre*/
+font-weight: bold ;
+}
+label {
+    font-family: 'Roboto', sans-serif ! important;
+    border-radius: 10px  ! important;
+    text-shadow: 1px 1px 1px #bdd773 ! important;
+    color: #3b68d4 ! important;
+    font-weight: bold !important;
+
+}
+
+.text-center {
+        text-align: center;
+        vertical-align: middle;
+    }
+
+
+/* text flash message */
+
+
+/* Styles pour les messages d'alerte */
+.alert-success {
+    background-color: rgb(113, 202, 147); /* Une couleur verte apaisante */
+    color: #d33682 ! important; /* Une couleur de texte foncée pour un bon contraste */
+    font-family: 'Papyrus', fantasy ! important; /* Papyrus pour le style */
+    font-size: 18px; /* Une taille de police plus grande pour la lisibilité */
+    border: 1px solid #268bd2; /* Bordure pour définir le message d'alerte */
+    padding: 10px; /* Padding interne pour l'espacement */
+    border-radius: 5px; /* Bordures arrondies pour un look doux */
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1); /* Ombre légère pour la profondeur */
+    margin: 10px 0; /* Marges pour l'espacement autour de l'alerte */
+}
+
+.alert {
+    border: none;
+    color: #fd7e14;
+    font-family: 'Ariel',cursive;
+
+
+}
+
+
+/* Personnalisation des tables */
+
+.table {
+    border-collapse: separate !important; /* Effondrez les bordures - s'il n'y a pas de conflit avec d'autres styles, retirez le !important */
+    color: #2aa17c  ;
+    margin-bottom: 1rem; /* Espacement sous la table */
+    background-color: #93cbf35e; /* Fond bleu légère pour la clarté */
+
+}
+
+
+
+/* Lignes de la table au survol */
+.table:hover {
+    background-color: #f4f4f7; /* Changement de couleur au survol */
+}
+
+
+
+
+.table th {/*titre de table lign1*/
+
+    background-color: #adf1bb; /* Couleur de fond pour les en-têtes */
+    font-weight: bold; /* Rendre le texte des en-têtes plus gras */
+    text-transform: uppercase ;
+    border: 4px solid #91dad4  ;
+
+}
+
+.table td {/*than table 1*/
+    padding: 7px; /* Espacement intérieur autour du contenu des cellules de données */
+    border: 2px solid #91dad4 ; /* Bordure autour de chaque cellule de données */
+    box-shadow: 2px 1px 3px #1292ec;
+}
+
+
+/* S'il manque une bordure autour de la table entière */
+.table-bordered {
+
+    box-shadow: 4px 8px 20px #0ada55; /* Ombre portée avec une couleur verte */
+    border: 4px solid #56afeda8; /* Couleur de bordure subtile */
+    width: 100%;
+}
+
+
+/*table free*/
+
+.table-free {
+    width: 100%; /* La largeur de la table sera de 100% de son conteneur */
+    border-collapse: collapse; /* Les bordures des cellules seront collées ensemble */
+    background-color: #fff; /* Un fond blanc pour la table */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Une ombre douce pour donner de la profondeur */
+    /* Ajoutez d'autres styles généraux pour la table ici */
+}
+
+.table-free th, .table-free td {
+    border: 2px solid #2cbb11; /* Une bordure solide pour toutes les cellules */
+    padding: 6px; /* Un padding intérieur pour les cellules */
+    text-align: left; /* Un alignement de texte à gauche */
+
+}
+
+.table-free th {
+    background-color:#79e5dc;
+    color: #1e6fa8; /* Une couleur de texte pour les en-têtes */
+    font-weight: bold; /* Un poids de police plus lourd pour les en-têtes */
+
+}
+
+.table-free td {
+    color: #d33682db; /* Une couleur de texte pour les cellules */
+    font-weight: bold;
+    font-family: 'Papyrus', fantasy;
+    padding: 8px;
+    border-bottom: 1px solid #dee2e6; /* Légère bordure en bas pour chaque cellule */
+
+}
+
+/* Pour un effet de survol sur les lignes */
+.table-free tr:hover {
+    background-color: #f1f1f1; /* Un fond clair au survol d'une ligne */
+}
+.table-container {
+    display: flex;
+    justify-content: center; /* Centre le tableau horizontalement */
+    align-items: center; /* Centre le tableau verticalement si nécessaire */
+    height: 100%; /* Assure que le conteneur prend toute la hauteur */
+}
+
+
+
+.highlight {
+    background-color: yellow; /* Choisissez la couleur que vous préférez */
+}
+
+
+
+/* styles.css */
+.action-button {
+    display: inline-block; /* Assure que les boutons sont sur la même ligne */
+    margin: 10px 10px 10px 10px !important; /* Espace à droite pour tous les boutons sauf le dernier */
+}
+
+/* Assure que le dernier bouton n'a pas de marge sur la droite */
+.action-button:last-child {
+    margin-right: 0 !important;
+}
+
+/* Ensuite, ajustez pour les boutons qui se suivent */
+.action-button + .action-button {
+    margin-left: 10px; /* 10px d'espace entre les boutons */
+}
+
+/*style pour btn*/
+
+.btn {
+    padding: 9px 15px; /* Exemple de padding : 10px en haut et en bas, 20px à gauche et à droite */
+   cursor: pointer;
+}
+
+
+    /*style pour input bouton*/
+  input {
+    border-color: #1e6fa8 ;
+    background-color:#f5f5f5;
+
+    }
+
+
+/* Bouton 'Ajouter' avec couleur vert */
+.btn-success{
+    background-color: #2b983d !important;
+    border-color: #e5f572 !important;
+}
+
+.btn-success:hover {
+    background-color: #93e27eba !important;
+    color: #281a1f !important;
+    transform: translateY(-2px); /* Déplacer légèrement le bouton vers le haut */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Ombre plus prononcée */
+}
+/* Bouton 'Edit' avec couleur d'avertissement (jaune) */
+.btn-warning {
+    background-color: #ffc107 !important; /* Jaune */
+    border-color: #2aa198!important;
+    padding: 6px 12px!important;
+    margin-right: 10px!important; /* Espace entre les boutons */
+
+    /* Autres styles nécessaires */
+}
+
+.btn-warning:hover {
+    background-color: #ffeb3b9e; /* Jaune plus clair */
+    transform: translateY(-2px); /* Déplacer légèrement le bouton vers le haut */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Ombre plus prononcée */
+
+
+}
+
+/* Bouton 'Supprimer' avec couleur de danger (rouge) */
+.btn-danger {
+    background-color: #f44336 !important; /* Rouge */
+    border-color: #2aa198 !important;
+    padding: 6px 12px;
+
+    /* Autres styles nécessaires */
+}
+
+.btn-danger:hover {
+    background-color: #ad145e !important; /* Rouge plus foncé */
+    transform: translateY(-2px); /* Déplacer légèrement le bouton vers le haut */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4); /* Ombre plus prononcée */
+
+}
+
+/* Bouton 'Modifier' avec couleur de bleu et hover en jaune pour édit */
+.btn-info {
+    background-color: #268bd2 !important;
+    border-color: #d5e35e !important;
+    font-family: 'Papyrus', sans-serif ! important;
+}
+
+.btn-info:hover {
+    background-color: #eae44e !important;
+    color: #002b36 !important;
+    border-color: #1e6fa8 !important;
+}
+
+/*bouton en coleur jaune*/
+.btn btn-primary {
+    color: #002b36 !important;
+    background-color: #19615b !important;
+    border-color: #cb4b16 !important;
+}
+
+.btn-primary:hover{
+    color: #002b36 !important;
+    background-color: #cad226 !important;
+    border-color: #19615b !important;
+}
+
+
+.btn-free {
+        font-family: 'Papyrus', fantasy ! important;
+        font-size: 20px !important;
+        color:  #268bd2!important; /* blue+green */
+        text-shadow: 1px 1px 0px  #59f5f1!important;
+        border-color: #19615b !important;
+}
+
+.btn-mini {
+    color: #2aa198 !important; /* Couleur du texte contrastant avec un fond turquoise */
+    background-color: #81e4e8c9 !important; /* Couleur de fond turquoise légère */
+    padding: 5px 5px !important; /* Espacement interne pour un aspect bouton */
+    border-radius: 5px !important; /* Bordures arrondies */
+    font-weight: bold !important; /* Texte en gras pour mettre en avant */
+    display: inline-block ; /* Pour appliquer des marges et du padding */
+    transition: all 0.3s ease !important; /* Transition douce pour les interactions */
+}
+
+.btn-mini:hover {
+    background-color: #009faa !important; /* Couleur de fond plus foncée au survol */
+    color: #fff !important; /* Texte blanc au survol pour plus de contraste */
+    cursor: pointer !important; /* Change le curseur en main pour indiquer la possibilité de cliquer */
+}
+
+.btn-user {
+    color: #2aa198!important; /* Bleu Bootstrap pour rester cohérent avec le thème */
+    font-weight: bold !important; /* Rendre le texte en gras */
+    text-transform: uppercase !important; /* Mettre le texte en majuscules pour plus d'importance */
+    background-color: transparent !important; /* Pas de fond pour permettre de voir la couleur du tableau */
+    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.7) !important; /* Une légère ombre de texte pour améliorer le contraste sur un fond bleu clair */
+    cursor: pointer !important; /* Change le curseur pour indiquer que le nom est cliquable */
+}
+
+
+.btn-user1:hover {
+    color: #0275d8 !important; /* Changement de couleur au survol pour une interaction visuelle */
+}
+
+.btn-user1{
+        color: #5ea12a !important;
+        font-weight: bold !important; /* Rendre le texte en gras */
+        background-color: transparent !important; /* Pas de fond pour permettre de voir la couleur du tableau */
+        text-shadow: 0 1px 1px rgba(255, 255, 255, 0.7) !important; /* Une légère ombre de texte pour améliorer le contraste sur un fond bleu clair */
+        cursor: pointer !important; /* Change le curseur pour indiquer que le nom est cliquable */
+        font-family: 'Papyrus', sans-serif ! important;
+        font-size: 20px !important;
+        border: 5px !important; /* Pas de bordure */
+
+}
+/* Style pour l'effet de survol pour augmenter l'interactivité */
+.btn-user:hover {
+    color: #01549b !important; /* Assombrir le texte au survol pour un contraste accru */
+
+}
+
+
+
+.btn-user2:hover {
+            color: #0275d8 !important; /* Changement de couleur au survol pour une interaction visuelle */
+}
+
+.btn-user2{
+            color: #2aa13b!important; /* Choix d'une couleur qui se détache sur le fond bleu clair */
+            font-weight: bold !important; /* Texte en gras */
+            font-family: 'Papyrus', cursive !important; /* Papyrus avec secours */
+            font-size: 20px !important;
+            background-color: transparent !important; /* Fond transparent pour intégrer dans le tableau */
+            border: 5px !important; /* Pas de bordure */
+            background-color: #81e4e8c9 !important;
+            cursor: pointer !important; /* Changement du curseur pour l'interactivité */
+
+
+                    }
+
+  /*forme control choix*/
+.form-control {
+    width: 30%;
+    color: #364ad3 ;
+    background-color: #268bd266 !important;
+    font-weight: bold;
+    border-color: #4ca5e4;
+    box-shadow: 0 4px 8px rgb(112 234 98) /* Ombre plus prononcée */;
+    cursor: pointer;
+    transition: all 0.3s ease ;
+
+}
+
+.form-control:hover {
+             transform: translateY(-2px); /* Déplacer légèrement le bouton vers le haut */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4); /* Ombre plus prononcée */
+
+}
+.control:hover {
+             transform: translateY(-2px); /* Déplacer légèrement le bouton vers le haut */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4); /* Ombre plus prononcée */
+
+}
+.controler:hover {
+             transform: translateY(-2px); /* Déplacer légèrement le bouton vers le haut */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4); /* Ombre plus prononcée */
+
+}
+
+.control {
+    width: 65% ;
+    color: #364ad3 ;
+    background-color: #cce8fc;
+    font-weight: bold;
+    border-color: #4ca5e4;
+    box-shadow: 0 4px 8px rgb(112 234 98) /* Ombre plus prononcée */;
+    cursor: pointer;
+    transition: all 0.3s ease ;
+    border-radius: 5px !important;
+    padding : 12px 10px 12px 9px;
+    /*haut-droit-bas-gauche*/
+    margin-bottom: 30px;
+
+}
+
+.controler {
+    width: 55% ;
+    color: #364ad3 ;
+    background-color: #cce8fc;
+    font-weight: bold;
+    border-color: #4ca5e4;
+    box-shadow: 0 4px 8px rgb(112 234 98) /* Ombre plus prononcée */;
+    transition: all 0.3s ease ;
+    padding : 9px 9px 9px 9px ;
+    border-radius: 5px !important;
+    /*haut-droit-bas-gauche*/
+    margin-bottom: 25px ;
+    appearance: none;
+
+
+}
+
+
+
+
+
+@media (max-width: 768px) {
+    .form-control {
+        width: 100%; /* Prendre toute la largeur sur les petits écrans */
+    }
+}
+/*TAGS SELECT*/
+
+.qtagselect__choice.ispurple {
+    color: #d33682 !important;
+    background-color: rgb(100 220 82 / 15%)!important;
+    border: solid 1px #cb4b16!important;
+    border-radius: 5px #cb4b16!important;
+
+}
+
+
+
+.qtagselect__container {
+    color: #b245bc!important;
+    background-color: #49ccc2d4!important;
+    padding : 1x!important;
+}
+
+
+.p-3 {
+    color: #b245bc!important;
+    padding: 1rem !important;
+    background-color: #ccf2ef;
+    border: 2x #d33682 !important;
+}
+
+.p-4 {
+    padding: 1rem !important;
+    margin-left: 5px !important;
+}
+
+/*Date*/
+.date-input-container {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px; /* Ajustez la marge selon les besoins */
+    }
+
+    .date-input-container label {
+        margin-right: 5px;
+    }
+
+    .date-input-container input {
+        margin-right: 10px;
+    }
+
+  /* CLASS POUR IMAGE ET NAVIGATION DANS HOME*/
+  /* styles.css */
+
+.nav-list-custom {
+    list-style-type: none;
+    padding: 10;
+    margin: 10;
+}
+
+.nav-item-custom {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.nav-image-custom {
+    width: 125px; /* Ajuster la taille selon les besoins */
+    height: 105px; /* Ajuster la taille selon les besoins */
+    margin-right: 10px;
+    border: 3px solid #f0f0f0;
+    border-radius: 10px;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+
+}
+
+.nav-image-custom:hover {
+    transform: rotate(5deg); /* Tourne légèrement l'image */
+}
+
+
+.nav-link-custom {
+    font-weight: bold;
+    font-family: 'Papyrus', fantasy !important;
+    font-size: 18px !important;
+    color:  #2aa198 !important; /* blue+green */
+    text-shadow: 1px 1px 0px  #59f5f1!important;
+}
+.nav-link-custom:hover {
+    color: green !important; /* Changer la couleur à vert lors du survol */
+    font-size: 23px !important; /* Agrandir le texte lors du survol */
+}
+
+/*footer*/
+footer {
+    background-color:green ; /* Couleur de fond légère */
+    padding: 10px 0;
+}
+
+.footer-user{
+background-color:#56eee359 ;
+}
+
+footer .positive-message {
+    font-style: italic;
+    color: #2aa198; /* Couleur personnalisée */
+    font-family: 'Papyrus', fantasy ;
+    font-size: 15px ;
+}
+
+footer .small {
+    color: #16b55df2; /* Couleur grise */
+    font-family: 'Papyrus', fantasy ;
+    font-size: 15px ;
+    font-weight: bold ;
+}
+footer a{
+    font-family: 'Papyrus', fantasy ;
+    font-size: 15px ;
+}
+
+
+footer a:hover {
+    text-decoration: underline;
+    color: #0275d8 !important; /* Changement de couleur au survol pour une interaction visuelle */
+    font-size: 18px;
+
+}
+
+
+/*404*/
+
+
+.display-4 {
+    font-size: 3rem;
+    color: #dc3545; /* Couleur rouge pour le code d'erreur */
+}
+
+.text-muted {
+    color: #6c757d; /* Couleur grise pour le texte de l'erreur */
+}
+
+.mt-5 {
+    margin-top: 3rem !important;
+}
+
+.mt-4 {
+    margin-top: 1.5rem !important;
+}
+
+.mb-4 {
+    margin-bottom: 1.5rem !important;
+}

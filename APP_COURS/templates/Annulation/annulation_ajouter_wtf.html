@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+{% block title %} Ajout d'une Annulation pour Cours Inscrit {% endblock %}
+{% block head %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+{% endblock %}
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h2 class="text-center mt-4">Ajout d'une Annulation pour Cours Inscrit</h2>
+            <form action="" method="POST" novalidate class="mt-4">
+                {{ form.hidden_tag() }}
+                <div class="form-group">
+                    <p>
+                        {{ form.personne_wtf.label }}<br>
+                        {{ form.personne_wtf(class="controler", id="personne_wtf") }}<br>
+                        {% for error in form.personne_wtf.errors %}
+                            <span style="color: red;">{{ error }}</span><br>
+                        {% endfor %}
+                    </p>
+                    <p>
+                        {{ form.fk_inscrirecours.label }}<br>
+                        {{ form.fk_inscrirecours(class="controler", id="cours_wtf") }}<br>
+                        {% for error in form.fk_inscrirecours.errors %}
+                            <span style="color: red;">{{ error }}</span><br>
+                        {% endfor %}
+                    </p>
+                    <p>
+                        {{ form.raison_wtf.label }}<br>
+                        {{ form.raison_wtf(class="form-control") }}<br>
+                        {% for error in form.raison_wtf.errors %}
+                            <span style="color: red;">{{ error }}</span><br>
+                        {% endfor %}
+                    </p>
+                </div>
+                <button type="submit" class="btn btn-info">Ajouter l'annulation</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block javascript %}
+<script>
+$(document).ready(function() {
+    $('#personne_wtf').change(function() {
+        var personneId = $(this).val();
+        $.ajax({
+            url: "{{ url_for('charger_cours_annulation') }}",
+            method: "GET",
+            data: { personne_id: personneId },
+            success: function(cours) {
+                var select = $('#cours_wtf');
+                select.empty();
+                if (cours.length > 0) {
+                    cours.forEach(function(course) {
+                        select.append($('<option>', {
+                            value: course.id,
+                            text: course.titre
+                        }));
+                    });
+                } else {
+                    select.append($('<option>').attr('value', '').text('Aucun cours disponible'));
+                }
+            },
+            error: function(xhr, status, error) {
+                console.log("Erreur lors du chargement des cours : " + error);
+                var select = $('#cours_wtf');
+                select.append($('<option>').attr('value', '').text('Erreur de chargement'));
+            }
+        });
+    });
+
+    // Déclencher l'événement change au chargement de la page pour initialiser les valeurs
+    $('#personne_wtf').trigger('change');
+});
+</script>
+{% endblock %}

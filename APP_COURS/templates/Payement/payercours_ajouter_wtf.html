@@ -1,0 +1,121 @@
+{% extends "base.html" %}
+{% block title %} Ajout de Paiement pour Cours Inscrit {% endblock %}
+{% block head %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+{% endblock %}
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h2 class="text-center mt-4">Ajout de Paiement pour Cours Inscrit</h2>
+            <form action="" method="POST" novalidate class="mt-4">
+                {{ form.hidden_tag() }}
+                <div class="form-group">
+                    <p>
+                        {{ form.personne_wtf.label }}<br>
+                        {{ form.personne_wtf(class="controler", id="personne_wtf") }}<br>
+                        {% for error in form.personne_wtf.errors %}
+                            <span style="color: red;">{{ error }}</span><br>
+                        {% endfor %}
+                    </p>
+                    <p>
+                        {{ form.fk_inscrirecours.label }}<br>
+                        {{ form.fk_inscrirecours(class="controler", id="cours_wtf") }}<br>
+                        {% for error in form.fk_inscrirecours.errors %}
+                            <span style="color: red;">{{ error }}</span><br>
+                        {% endfor %}
+                    </p>
+                    <p>
+                        {{ form.montant_principal_wtf.label }}<br>
+                        {{ form.montant_principal_wtf(class="form-control", id="montant_principal_wtf", readonly=True) }}<br>
+                        {% for error in form.montant_principal_wtf.errors %}
+                            <span style="color: red;">{{ error }}</span><br>
+                        {% endfor %}
+                    </p>
+                    <p>
+                        {{ form.montant_wtf.label }}<br>
+                        {{ form.montant_wtf(class="form-control") }}<br>
+                        {% for error in form.montant_wtf.errors %}
+                            <span style="color: red;">{{ error }}</span><br>
+                        {% endfor %}
+                    </p>
+                    <p>
+                        {{ form.mode_paiement_wtf.label }}<br>
+                        {{ form.mode_paiement_wtf(class="form-control", id="mode_paiement_wtf") }}<br>
+                        {% for error in form.mode_paiement_wtf.errors %}
+                            <span style="color: red;">{{ error }}</span><br>
+                        {% endfor %}
+                    </p>
+                    <p>
+                        {{ form.statut_wtf.label }}<br>
+                        {{ form.statut_wtf(class="form-control") }}<br>
+                        {% for error in form.statut_wtf.errors %}
+                            <span style="color: red;">{{ error }}</span><br>
+                        {% endfor %}
+                    </p>
+                    <p>
+                        {{ form.rabais_wtf.label }}<br>
+                        {{ form.rabais_wtf(class="form-control") }}<br>
+                        {% for error in form.rabais_wtf.errors %}
+                            <span style="color: red;">{{ error }}</span><br>
+                        {% endfor %}
+                    </p>
+                    <p>
+                        {{ form.description_rabais_wtf.label }}<br>
+                        {{ form.description_rabais_wtf(class="form-control") }}<br>
+                        {% for error in form.description_rabais_wtf.errors %}
+                            <span style="color: red;">{{ error }}</span><br>
+                        {% endfor %}
+                    </p>
+                </div>
+                <button type="submit" class="btn btn-info">Ajouter le Payement</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block javascript %}
+<script>
+$(document).ready(function() {
+    $('#personne_wtf').change(function() {
+        var personneId = $(this).val();
+        $.ajax({
+            url: "{{ url_for('charger_cours') }}",
+            method: "GET",
+            data: { personne_id: personneId },
+            success: function(cours) {
+                var select = $('#cours_wtf');
+                select.empty();
+                if (cours.length > 0) {
+                    cours.forEach(function(course) {
+                        select.append($('<option>', {
+                            value: course.id,
+                            text: course.titre,
+                            'data-prix': course.prix
+                        }));
+                    });
+                    // Déclencher l'événement change pour mettre à jour le montant principal
+                    select.trigger('change');
+                } else {
+                    select.append($('<option>').attr('value', '').text('Aucun cours disponible'));
+                    $('#montant_principal_wtf').val('');
+                }
+            },
+            error: function(xhr, status, error) {
+                console.log("Erreur lors du chargement des cours : " + error);
+                select.append($('<option>').attr('value', '').text('Erreur de chargement'));
+                $('#montant_principal_wtf').val('Erreur de chargement');
+            }
+        });
+    });
+
+    $('#cours_wtf').change(function() {
+        var prix = $(this).find('option:selected').data('prix');
+        $('#montant_principal_wtf').val(prix);
+    });
+
+    // Déclencher l'événement change au chargement de la page pour initialiser les valeurs
+    $('#personne_wtf').trigger('change');
+});
+</script>
+{% endblock %}

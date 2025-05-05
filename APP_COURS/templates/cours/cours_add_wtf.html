@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% block title %} Ajouter un cours {% endblock %}
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h2>
+                Ajouter un nouveau cours
+            </h2><br>
+            <form action="" method="POST" novalidate>
+                <!-- Protection contre les attaques Cross-Site Request Forgery (CSRF) -->
+                {{ form.hidden_tag() }}
+                <div class="form-group">
+                    <p>
+                        {{ form.titre_cours_wtf.label }}<br>
+                        {{ form.titre_cours_wtf(size=32) }}<br>
+                        {% for error in form.titre_cours_wtf.errors %}
+                            <span style="color: red;">[{{ error }}]</span>
+                        {% endfor %}
+                    </p>
+                    <p>
+                        {{ form.niveau_cours_wtf.label }}<br>
+                        {{ form.niveau_cours_wtf(class="form-control") }}<br>
+                        {% for error in form.niveau_cours_wtf.errors %}
+                            <span style="color: red;">[{{ error }}]</span>
+                        {% endfor %}
+                    </p>
+                    <p>
+                        {{ form.session_cours_wtf.label }}<br>
+                        {{ form.session_cours_wtf(size=32) }}<br>
+                        {% for error in form.session_cours_wtf.errors %}
+                            <span style="color: red;">[{{ error }}]</span>
+                        {% endfor %}
+                    </p>
+                    <p>
+                        {{ form.prix_par_session_cours_wtf.label }}<br>
+                        {{ form.prix_par_session_cours_wtf(size=32) }}<br>
+                        {% for error in form.prix_par_session_cours_wtf.errors %}
+                            <span style="color: red;">[{{ error }}]</span>
+                        {% endfor %}
+                    </p>
+                    <p>
+                        {{ form.description_cours_wtf.label }}<br>
+                        {{ form.description_cours_wtf(class="form-control") }}<br>
+                        {% for error in form.description_cours_wtf.errors %}
+                            <span style="color: red;">[{{ error }}]</span>
+                        {% endfor %}
+                    </p>
+                    <p>
+                        {{ form.affiche_cours_wtf.label }}<br>
+                        {{ form.affiche_cours_wtf(class="form-control") }}<br>
+                        {% for error in form.affiche_cours_wtf.errors %}
+                            <span style="color: red;">[{{ error }}]</span>
+                        {% endfor %}
+                    </p>
+                </div>
+                {{ form.submit(class="btn btn-info") }}
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

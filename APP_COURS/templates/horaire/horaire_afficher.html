@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block title %} Afficher Horaire {% endblock %}
+{% block body %}
+<div class="container">
+    <div class="table-container">
+        <div class="col-md-12">
+            <h2>Gestion des Cours</h2>
+            <!-- Bouton Ajouter pour ajouter un cours placé en haut -->
+            <a class="btn btn-success mb-3" href="{{ url_for('horaire_ajouter_wtf') }}" role="button">Ajouter un Horaire</a>
+            <table class="table table-bordered table-sm">
+                {% if data %}
+                <thead>
+                    <tr>
+                        <th class="align-middle">Id</th>
+                        <th class="align-middle">Date</th>
+                        <th class="align-middle">Jour Semaine</th>
+                        <th class="align-middle">Heure_debut</th>
+                        <th class="align-middle">Heure_fin</th>
+                        <th class="align-middle">Actions</th> <!-- Colonne ajoutée pour les actions Edit et Delete -->
+                    </tr>
+                </thead>
+                {% for row in data %}
+                <tbody>
+                    <tr class=" btn-user1 {% if highlighted_id and row.ID_horaire == highlighted_id|int %}table-success{% endif %}">
+                        <td class="align-middle">{{ row.ID_horaire }}</td>
+                        <td class="align-middle"><h6>{{ row.date_cours }}</h6></td>
+                        <td class="align-middle"><h9>{{ row.jour_semaine }}</h9></td>
+                        <td class="align-middle"><h6>{{ row.heure_debut }}</h6></td>
+                        <td class="align-middle"><h9>{{ row.heure_fin }}</h9></td>
+                        <td class="text-center align-middle">
+                            <a class="btn btn-warning action-button" href="{{ url_for('horaire_update_wtf', id_horaire_btn_edit_html=row.ID_horaire) }}" role="button">Edit</a>
+                            <a class="btn btn-danger action-button" href="{{ url_for('horaire_delete_wtf', id_horaire_btn_delete_html=row.ID_horaire) }}" role="button">Delete</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                {% else %}
+                <tbody>
+                    <tr>
+                        <td colspan="8">Aucune donnée disponible.</td>
+                    </tr>
+                </tbody>
+                {% endif %}
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block title %}Afficher Dictionnaire{% endblock %}
+
+{% block body %}
+<div class="container">
+    <h2>Dictionnaire de données </h2>
+    <iframe src="{{ url_for('static', filename='Dictionnaire_de_Données.pdf') }}" width="100%" height="600px"></iframe>
+</div>
+{% endblock %}

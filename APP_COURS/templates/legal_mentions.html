@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %} Mentions Légales {% endblock %}
+{% block body %}
+<div class="container">
+    <h2>Mentions Légales</h2><br>
+    <p><img src="{{ url_for('static', filename='images/security.png') }}" alt="security" class="nav-image-custom"></p>
+      <p>  <h6>
+        Ce projet est le fruit de mes travaux personnels.
+        J'ai utilisé des codes de mon professeur OM,
+        ainsi que de diverses sources internet, dont ChatGPT, Perplexity, et mes propres recherches.</h6>
+    </p><br>
+    <p>
+        <h7>Toute reproduction non autorisée est interdite, sauf pour usage éducatif ou citations appropriées.</h7>
+    </p>
+    <p>
+        <h4>Auteur: Trangle_ expi1b</h4>
+        <h4>E-mail: Trangle@eduvaud.ch</h4>
+    </p>
+</div>
+{% endblock %}

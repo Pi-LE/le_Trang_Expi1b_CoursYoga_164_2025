@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block title %} Ajouter un Horaire {% endblock %}
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h2>
+                Ajouter un nouveau Horaire
+            </h2><br>
+            <form action="" method="POST" novalidate>
+                <!-- Protection contre les attaques Cross-Site Request Forgery (CSRF) -->
+                {{ form.hidden_tag() }}
+                <div class="form-group">
+                    <p>
+                        {{ form.date_cours_wtf.label }}<br>
+                        {{ form.date_cours_wtf(size=32) }}<br>
+                        {% for error in form.date_cours_wtf.errors %}
+                            <span style="color: red;">[{{ error }}]</span>
+                        {% endfor %}
+                    </p>
+                    <p>
+                        {{ form.jour_semaine_wtf.label }}<br>
+                        {{ form.jour_semaine_wtf(class="form-control") }}<br>
+                        {% for error in form.jour_semaine_wtf.errors %}
+                            <span style="color: red;">[{{ error }}]</span>
+                        {% endfor %}
+                    </p>
+                    <p>
+                        {{ form.heure_debut_wtf.label }}<br>
+                        {{ form.heure_debut_wtf(size=32) }}<br>
+                        {% for error in form.heure_debut_wtf.errors %}
+                            <span style="color: red;">[{{ error }}]</span>
+                        {% endfor %}
+                    </p>
+                    <p>
+                        {{ form.heure_fin_wtf.label }}<br>
+                        {{ form.heure_fin_wtf(size=32) }}<br>
+                        {% for error in form.heure_fin_wtf.errors %}
+                            <span style="color: red;">[{{ error }}]</span>
+                        {% endfor %}
+                    </p>
+                </div>
+                {{ form.submit(class="btn btn-info") }}
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

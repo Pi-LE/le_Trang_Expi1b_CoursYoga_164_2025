@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% block title %}Effacer une Annulation{% endblock %}
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Effacer Définitivement une Annulation</h2>
+            <form action="" method="POST" novalidate>
+                {{ form_delete.hidden_tag() }}
+                <table class="table table-bordered table-sm">
+                    {% if data_annulation_delete %}
+                    <thead>
+                        <tr class="btn-user">
+                            <th>Id Annulation</th>
+                            <th>Id Inscrire Cours</th>
+                            <th>Raison</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="btn-user1">
+                            <td><h6>{{ data_annulation_delete.ID_AnnulerCours }}</h6></td>
+                            <td><h6>{{ data_annulation_delete.FK_Inscrirecours }}</h6></td>
+                            <td><h6>{{ data_annulation_delete.Raison }}</h6></td>
+                        </tr>
+                    </tbody>
+                    {% else %}
+                    <tbody>
+                        <tr><td colspan="3">Aucune information disponible.</td></tr>
+                    </tbody>
+                    {% endif %}
+                </table>
+                {% if associations %}
+                <h4>Cette Annulation est associée aux éléments suivants</h4>
+                <div class="p-3">
+                    <table class="table-free">
+                        <thead>
+                            <tr>
+                                <th>Nom</th>
+                                <th>Prénom</th>
+                                <th>Cours Inscrit</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for assoc in associations %}
+                            <tr>
+                                <td>{{ assoc.Nom }}</td>
+                                <td>{{ assoc.Prenom }}</td>
+                                <td>{{ assoc.Titre }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                {% else %}
+                <h4>Cette Annulation n'est associée à aucun élément.</h4>
+                {% endif %}
+                <div class="form-group">
+                    {{ form_delete.submit_btn_confirmation(class="btn btn-info") }}
+                    {% if btn_submit_del %}
+                    {{ form_delete.submit_btn_del(class="btn btn-danger") }}
+                    {% endif %}
+                    {{ form_delete.submit_btn_annuler(class="btn btn-warning") }}
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

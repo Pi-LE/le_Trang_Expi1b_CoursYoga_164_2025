@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %} Page Non Trouvée {% endblock %}
+{% block body %}
+<div class="container text-center mt-5">
+    <h1 class="display-4">404</h1>
+    <h2 class="mb-4">Page Non Trouvée</h2>
+    <h7 class="text-muted">Il semble que vous ayez rencontré un problème de routage.</h7>
+    <p class="mt-4">
+        La page que vous recherchez n'existe pas ou une autre erreur s'est produite. Veuillez vérifier l'URL ou retourner à la <a href="{{ url_for('home') }}">page d'accueil</a>.
+    </p>
+</div>
+{% endblock %}

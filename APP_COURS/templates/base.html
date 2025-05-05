@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- parti head pour des stylesheet css-->
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<title>{% block title %}Gestion Cours Yoga{% endblock %}</title>
+
+	<!-- Bootstrap CSS en local pour éviter la dépendance à une connexion internet -->
+	<script src="{{ url_for('static', filename='js/jquery.slim.min.js') }}"></script>
+	<script src="{{ url_for('static', filename='js/popper.min.js') }}"></script>
+	<script src="{{ url_for('static', filename='bootstrap-5.0.0-beta2-dist/js/bootstrap.min.js') }}"></script>
+
+	<!-- Stylesheet  pour le design font family -->
+	<link href="https://fonts.googleapis.com/css2?family=Tangerine:wght@400;700&display=swap" rel="stylesheet">
+
+	<!-- https://bootswatch.com/solar/-->
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='bootswatch-4/solar/bootstrap.min.css') }}">
+
+	<!--  fichier CSS personnalisé doit être ajouté après le fichier CSS de Bootswatch -->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+
+	<!-- Favicon personnalisé -->
+	<link rel="shortcut icon" href="{{ url_for('static', filename='lotus2.ico') }}">
+
+	{% block head %}
+	{% endblock %}
+
+</head>
+
+<!--partie body pour des autres contenues de website -->
+<body>
+
+{% block header %}
+{% endblock %}
+<div class="header-banner">
+        <h1 class="top-title">Gestion cours</h1>
+        <h1 class="bottom-title">Yoga et Méditation</h1>
+</div>
+<!-- Navigation  fixed-top -->
+
+	<nav class="navbar navbar-expand-lg navbar-dark bg-success">
+		<div class="container-fluid">
+			<a class="navbar-brand" href="{{ url_for('mapageprincipale') }}">Homepage</a>
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDarkDropdown" aria-controls="navbarNavDarkDropdown" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
+				<ul class="navbar-nav">
+					<li class="nav-item">
+						<a class="nav-link" href="{{ url_for('personnes_afficher', order_by='ASC', id_personne_sel=0) }}">Membres</a>
+					</li>
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" id="navdropdownfilms" role="button" data-bs-toggle="dropdown" aria-expanded="false">Fonction</a>
+						<ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+							<li><a class="nav-link" href="{{ url_for('fonction_afficher',order_by='ASC',id_fonction_sel=0) }}">Fonction</a></li>
+							<li><a class="nav-link" href="{{ url_for('personnes_fonctions_afficher',id_personne_sel=0) }}">Personne/Fonction</a></li>
+						</ul>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="{{ url_for('cours_afficher',order_by='ASC',id_cours_sel=0) }}">Cours</a>
+					</li>
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+							Gestionaire Cours
+						</a>
+						<ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+							<li><a class="dropdown-item" href="{{ url_for('inscriptions_afficher',order_by='ASC',id_personne_sel=0) }}">Inscription</a></li>
+							<li><a class="dropdown-item" href="{{ url_for('payercours_afficher',order_by='ASC',id_personne_sel=0) }}">Paiement</a></li>
+							<li><a class="dropdown-item" href="{{ url_for('annulation_afficher', order_by='ASC', id_personne_sel=0) }}">Annulation</a></li>
+						</ul>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="{{ url_for('horaire_afficher',order_by='ASC',id_horaire_sel=0) }}">Horaire</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="{{ url_for('afficher_mcd')}}">Modèle Conceptuel</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="{{ url_for('afficher_mld')}}">Modèle Logique</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="{{ url_for('afficher_dict')}}">Dictionnaire</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+
+	</nav>
+{% include 'flash_messages.html' %}
+
+
+
+<!-- End Navigation -->
+
+
+{% block body %}{% endblock %}
+
+{% block javascript %}
+
+{% endblock %}
+{% include 'footer.html' %}
+</body>
+</html>

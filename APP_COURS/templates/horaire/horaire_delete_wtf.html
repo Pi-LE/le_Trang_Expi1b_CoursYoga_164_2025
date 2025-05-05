@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+{% block title %}Effacer un Horaire{% endblock %}
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Effacer un Horaire</h2>
+            <form action="" method="POST" novalidate>
+                <!-- Protection contre les attaques Cross-Site Request Forgery (CSRF) -->
+                {{ form_delete.hidden_tag() }}
+                <!-- Information sur l'horaire -->
+                <table class="table table-bordered table-sm">
+                    {% if data_horaire_delete %}
+                    <thead>
+                        <tr class="btn-user">
+                            <th class="align-middle">Date du Cours</th>
+                            <th class="align-middle">Jour de la semaine</th>
+                            <th class="align-middle">Heure de début</th>
+                            <th class="align-middle">Heure de fin</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="btn-user1">
+                            <td class="align-middle">{{ data_horaire_delete.date_cours }}</td>
+                            <td class="align-middle">{{ data_horaire_delete.jour_semaine }}</td>
+                            <td class="align-middle">{{ data_horaire_delete.heure_debut }}</td>
+                            <td class="align-middle">{{ data_horaire_delete.heure_fin }}</td>
+                        </tr>
+                    </tbody>
+                    {% else %}
+                    <tbody>
+                        <tr><td colspan="4">Aucune information disponible pour cet horaire.</td></tr>
+                    </tbody>
+                    {% endif %}
+                </table>
+                <div class="form-group">
+                    {{ form_delete.submit_btn_confirmation(class="btn btn-info ") }}
+                    {% if btn_submit_del %}
+                        {{ form_delete.submit_btn_del(class="btn btn-danger") }}
+                    {% endif %}
+                    {{ form_delete.submit_btn_annuler(class="btn btn-warning") }}
+                </div>
+                {% if associations %}
+                <h4>Ce Cours est associé aux éléments suivants :</h4>
+                <div class="p-3">
+                <table class="table-free">
+                    <thead>
+                        <tr>
+                            <th>Titre Cours</th>
+                            <th>Niveau</th>
+                            <th>Session Cours</th>
+                            <th>Prix du Cours</th>
+                            <th>Description</th>
+                            <th>Affiche du cours</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for assoc in associations %}
+                            <tr>
+                                <td>{{ assoc.Titre }}</td>
+                                <td>{{ assoc.Niveau }}</td>
+                                <td>{{ assoc.Session}}</td>
+                                <td>{{ assoc.Prix_par_session }}</td>
+                                <td>{{ assoc.Description }}</td>
+                                <td><img src="{{ assoc.Affiche|default(None, True) }}" style="width:150px; max-height:auto;" alt="Image indisponible"></td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                </div>
+                {% else %}
+                <h4>Cet Horaire n'est associé à aucun élément.</h4>
+                {% endif %}
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

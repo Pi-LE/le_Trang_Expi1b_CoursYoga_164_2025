@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block title %}Payement Cours{% endblock %}
+{% block body %}
+<div class="container">
+    <div class="table-container">
+        <div class="row">
+            <div class="col-md-12">
+            <h2>Personne Payer Cours</h2>
+            <a class="btn btn-success mb-3" href="{{ url_for('paiement_ajouter') }}" role="button">Ajouter Paiement</a>
+            <table class="table table-bordered table-sm">
+                {% if data %}
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Nom Prénom</th>
+                        <th>Cours Inscrit</th>
+                        <th>Montant principal</th>
+                        <th class="text-center">Rabais</th>
+                        <th>Montant payé</th>
+                        <th>Montant restant</th>
+                        <th>Méthode Payement</th>
+                        <th class="text-center">Statut</th>
+                        <th class="text-center">Description</th>
+                        <th class="text-center" >Options</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in data %}
+                    <tr class="btn-user1 {% if highlighted_id and row.ID_payement == highlighted_id|int %}table-success{% endif %}">
+                        <td>{{ row.ID_payement }}</td>
+                        <td><h6>{{ row.Nom }} {{ row.Prenom }}</h6></td>
+                        <td><h6>{{ row.Titre }}</h6></td>
+                        <td><h7>{{ row.Prix_par_session }}</h7></td>
+                        <td><h7>{{ row.Rabais }}</h7></td>
+                        <td><h7>{{ row.Montant_paye }}</h7></td>
+                        <td><h7>{{ row.Montant_restant }}</h7></td>
+                        <td><h6>{{ row.Mode_paiement }}</h6></td>
+                        <td><h9>{{ row.Statut }}</h9></td>
+                        <td><h6>{{ row.Description_Rabais }}</h6></td>
+                        <td class="text-center align-middle">
+                            <a class="btn btn-warning" href="{{ url_for('paiement_update', id_paiement_btn_edit_html=row.ID_payement) }}" role="button">Edit</a>
+                            <a class="btn btn-danger" href="{{ url_for('paiement_delete', id_paiement_btn_delete_html=row.ID_payement ) }}" role="button">Delete</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+                {% else %}
+                <tr>
+                    <td colspan="8">Aucune donnée disponible.</td>
+                </tr>
+                {% endif %}
+            </table>
+        </div>
+    </div>
+ </div>
+</div>
+{% endblock %}

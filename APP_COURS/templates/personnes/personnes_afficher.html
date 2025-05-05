@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% block title %} Afficher PERSONNES {% endblock %}
+{% block body %}
+<div class="container">
+    <div class="table-container">
+        <div class="col-md-12">
+            <h2>Personnes</h2>
+            <!-- Bouton Ajouter placé en dehors du tableau pour ajouter une nouvelle personne -->
+            <a class="btn btn-success mb-3" href="{{ url_for('personnes_ajouter_wtf') }}" role="button">Ajouter une personne</a>
+            <table class="table table-bordered table-sm">
+                {% if data %}
+                <thead>
+                    <tr>
+                        <th class="align-middle">Id</th>
+                        <th class="align-middle">Nom</th>
+                        <th class="align-middle">Prénom</th>
+                        <th class="align-middle">Date de naissance</th>
+                        <th class="align-middle">Numéro AVS</th>
+                        <th class="align-middle">Sexe</th>
+                        <th class="align-middle">Date Enregistre</th>
+                        <th class="align-middle">Options</th> <!-- En-tête pour les options -->
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in data %}
+                    <tr class ="btn-user1 {% if highlighted_id and row.Id_personne == highlighted_id|int %}table-success{% endif %}">
+                        <td class="align-middle">{{ row.Id_personne }}</td>
+                        <td class="align-middle"><h6>{{ row.Nom }}</h6></td>
+                        <td class="align-middle"><h6>{{ row.Prenom }}</h6></td>
+                        <td class="align-middle"><h9>{{ row.Date_naissance }}</h9></td>
+                        <td class="align-middle"><h9>{{ row.NumeroAVS }}</h9></td>
+                        <td class="align-middle"><h6>{{ row.Sexe }}</h6></td>
+                        <td class="align-middle"><h9>{{ row.date_enregistre}}</h9></td>
+                        <td class="text-center align-middle">
+                            <!-- Boutons Edit et Delete pour chaque personne -->
+                            <a class="btn btn-warning" href="{{ url_for('personne_update_wtf', id_personne_btn_edit_html=row.Id_personne) }}" role="button">Edit</a>
+                            <a class="btn btn-danger" href="{{ url_for('personne_delete_wtf', id_personne_btn_delete_html=row.Id_personne) }}" role="button">Delete</a>
+
+                        </td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td colspan="7">Aucune personne trouvée.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+                {% else %}
+                <tbody>
+                    <tr>
+                        <td colspan="7">Aucune donnée disponible.</td>
+                    </tr>
+                </tbody>
+                {% endif %}
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

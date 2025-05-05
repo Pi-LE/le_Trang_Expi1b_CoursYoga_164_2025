@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+{% block title %}Effacer un Cours{% endblock %}
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Effacer un Cours</h2>
+            <form action="" method="POST" novalidate>
+                <!-- Protection contre les attaques Cross-Site Request Forgery (CSRF) -->
+                {{ form_delete.hidden_tag() }}
+                <!-- Information sur la personne -->
+                <table class="table table-bordered table-sm">
+                    {% if data_cours_delete %}
+                    <thead>
+                        <tr class="btn-user">
+							<th class="align-middle">Titre Cours</th>
+							<th class="align-middle">Niveau</th>
+							<th class="align-middle">Session cours</th>
+							<th class="align-middle">Prix</th>
+							<th class="align-middle">Description</th>
+							<th class="align-middle">Affiche</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for row in data_cours_delete %}
+                        <tr class ="btn-user1">
+							<td class="align-middle"><h6>{{ row.Titre }}</h6></td>
+							<td class="align-middle">{{ row.Niveau }}</td>
+							<td class="align-middle">{{ row.Session }}</td>
+							<td class="align-middle">{{ row.Prix_par_session }}</td>
+							<td class="align-middle">{{ row.Description|default("", True) }}</td>
+							<td class="align-middle">
+								<img src="{{ row.Affiche|default(None, True) }}" style="width:150px; max-height:auto;" alt="Image indisponible">
+							</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                    {% else %}
+                    <tbody>
+                        <tr><td colspan="6">Aucune information disponible pour ce cours.</td></tr>
+                    </tbody>
+                    {% endif %}
+                </table>
+                 <div class="form-group">
+                    {{ form_delete.submit_btn_confirmation(class="btn btn-info ") }}
+                    {% if btn_submit_del %}
+                        {{ form_delete.submit_btn_del(class="btn btn-danger") }}
+                    {% endif %}
+                    {{ form_delete.submit_btn_annuler(class="btn btn-warning") }}
+                    </div>
+                {% if associations %}
+                <h4>Ce Cours est associée aux éléments suivants </h4>
+                <div class="p-3">
+                <table class="table-free">
+                    <thead>
+                        <tr>
+                            <th>Date Cours</th>
+                            <th>Jour Semaine</th>
+                            <th>Nom Prénom</th>
+                            <th>Fonction</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for assoc in associations %}
+                            <tr>
+                                <td>{{ assoc.date_cours }}</td>
+                                <td>{{ assoc.jour_semaine }}</td>
+                                <td>{{ assoc.Nom}}/{{ assoc.Prenom }}</td>
+                                <td>{{ assoc.Type_fonction }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                </div>
+            {% else %}
+                <h4>Ce Cours n'est associée à aucun élément.</h4>
+            {% endif %}
+
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

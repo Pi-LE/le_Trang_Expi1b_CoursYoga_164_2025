@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% block title %} Homepage Cours {% endblock %}
+{% block body %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <h2>la gestion d'ateliers de yoga et de méditation.</h2><br>
+            <h6> Administration Complète( en utilisant 8 tables de données) pour Gestion des inscriptions, Fonction de la personne et gestion des paiements et des annulations.</h6><br>
+        </div>
+    </div>
+    <div class="row">
+        <!-- Colonne de gauche avec 4 éléments -->
+        <div class="col-md-6">
+            <ul class="nav-list-custom">
+                <li class="nav-item-custom">
+                    <img src="{{ url_for('static', filename='images/personne.jpg') }}" alt="personne" class="nav-image-custom">
+                    <a class="nav-link-custom" href="{{ url_for('personnes_afficher', order_by='ASC', id_personne_sel=0) }}">Gestion personne</a>
+                </li>
+                <li class="nav-item-custom">
+                    <img src="{{ url_for('static', filename='images/fonction.jpg') }}" alt="fonction" class="nav-image-custom">
+                    <a class="nav-link-custom" href="{{ url_for('fonction_afficher', order_by='ASC', id_fonction_sel=0) }}">Ajouter des Fonctions</a>
+                </li>
+                <li class="nav-item-custom">
+                    <img src="{{ url_for('static', filename='images/pers.fonction.jpg') }}" alt="pers.fonction " class="nav-image-custom">
+                    <a class="nav-link-custom" href="{{ url_for('personnes_fonctions_afficher', id_personne_sel=0) }}">Gestion fonction d'une personne</a>
+                </li>
+                <li class="nav-item-custom">
+                    <img src="{{ url_for('static', filename='images/cours.jpg') }}" alt="cours" class="nav-image-custom">
+                    <a class="nav-link-custom" href="{{ url_for('cours_afficher', order_by='ASC', id_cours_sel=0) }}">Gestion des cours</a>
+                </li>
+            </ul>
+        </div>
+        <!-- Colonne de droite avec 4 éléments -->
+        <div class="col-md-6">
+            <ul class="nav-list-custom">
+                <li class="nav-item-custom">
+                    <img src="{{ url_for('static', filename='images/inscription.jpg') }}" alt="inscription" class="nav-image-custom">
+                    <a class="nav-link-custom" href="{{ url_for('inscriptions_afficher', order_by='ASC', id_personne_sel=0) }}">Gestion des Inscriptions</a>
+                </li>
+                <li class="nav-item-custom">
+                    <img src="{{ url_for('static', filename='images/paiement.jpg') }}" alt="paiement" class="nav-image-custom">
+                    <a class="nav-link-custom" href="{{ url_for('payercours_afficher', order_by='ASC', id_personne_sel=0) }}">Gestion des Payements</a>
+                </li>
+                <li class="nav-item-custom">
+                    <img src="{{ url_for('static', filename='images/annulation.jpg') }}" alt="annulation" class="nav-image-custom">
+                    <a class="nav-link-custom" href="{{ url_for('annulation_afficher', order_by='ASC', id_personne_sel=0) }}">Gestion des Annulations</a>
+                </li>
+                <li class="nav-item-custom">
+                    <img src="{{ url_for('static', filename='images/horaire.jpg') }}" alt="horaire" class="nav-image-custom">
+                    <a class="nav-link-custom" href="{{ url_for('horaire_afficher', order_by='ASC', id_horaire_sel=0) }}">Gestion des Horaires</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}

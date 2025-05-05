@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block title %}Annulation Cours{% endblock %}
+{% block body %}
+<div class="container">
+    <div class="table-container">
+        <div class="row">
+            <div class="col-md-12">
+                <h2>Personne Annuler le Cours</h2>
+                <a class="btn btn-success mb-3" href="{{ url_for('annulation_ajouter') }}" role="button">Ajouter Annulation</a>
+                <table class="table table-bordered table-sm">
+                    {% if data %}
+                    <thead>
+                        <tr>
+                            <th>Id Inscrire</th>
+                            <th>Nom Prénom</th>
+                            <th>Numéro AVS</th>
+                            <th>Cours Inscrit</th>
+                            <th>Montant payé</th>
+                            <th>Raison Annulation</th>
+                            <th class="text-center">Options</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for row in data %}
+                        <tr class="btn-user1 {% if highlighted_id and row.ID_AnnulerCours == highlighted_id|int %}table-success{% endif %}">
+                            <td>{{ row.ID_AnnulerCours }}</td>
+                            <td><h6>{{ row.Nom }} {{ row.Prenom }}</h6></td>
+                            <td><h7>{{ row.NumeroAVS }}</h7></td>
+                            <td><h6>{{ row.Titre }}</h6></td>
+                            <td><h7>{{ row.Montant_paye }}</h7></td>
+                            <td><h7>{{ row.Raison }}</h7></td>
+                            <td class="text-center align-middle">
+                                <a class="btn btn-warning" href="{{ url_for('annulation_update', id_annulation_btn_edit_html=row.ID_AnnulerCours) }}" role="button">Edit</a>
+                                <a class="btn btn-danger" href="{{ url_for('annulation_delete', id_annulation_btn_delete_html=row.ID_AnnulerCours ) }}" role="button">Delete</a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                    {% else %}
+                    <tr>
+                        <td colspan="7">Aucune donnée disponible.</td>
+                    </tr>
+                    {% endif %}
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+{% block title %} Modifier l'inscription d'un cours {% endblock %}
+{% block head %}
+    <!-- Ressources pour tags-selector-tagselect -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='tags-selector-tagselect/jquery.tagselect.css') }}">
+    <script src="{{ url_for('static', filename='tags-selector-tagselect/jquery.tagselect.js') }}"></script>
+{% endblock %}
+{% block body %}
+<style>
+    ol, ul, li {
+        list-style: none;
+    }
+</style>
+<div class="container">
+    <div class="table-container">
+        <div class="col-md-12">
+            <h2>Modifier l'inscription d'un cours</h2>
+            <table class="table table-bordered">
+                <thead class="thead-light">
+                    <tr>
+                        <th colspan="2" class="text-center">Informations de l'étudiant</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% if data_personne %}
+                        {% for personne in data_personne %}
+                        <tr>
+                            <th>ID</th>
+                            <td class="btn-free">{{ personne.Id_personne}}</td>
+                        </tr>
+                        <tr>
+                            <th>Nom</th>
+                            <td class="btn-free">{{ personne.Nom }}</td>
+                        </tr>
+                        <tr>
+                            <th>Prénom</th>
+                            <td class="btn-free">{{ personne.Prenom }}</td>
+                        </tr>
+                        <tr>
+                            <th>Date de Naissance</th>
+                            <td class="btn-free">{{ personne.Date_naissance }}</td>
+                        </tr>
+                        <tr>
+                            <th>Sexe</th>
+                            <td class="btn-free">{{ personne.Sexe }}</td>
+                        </tr>
+                        {% endfor %}
+                    {% else %}
+                        <tr>
+                            <td colspan="7">Aucune information disponible pour cette personne.</td>
+                        </tr>
+                    {% endif %}
+                </tbody>
+            </table>
+
+            <!-- Formulaire pour modifier les cours inscrits -->
+            <form id="form_tags_select_confirm" action="{{ url_for('update_inscription_selected') }}" method="POST">
+                <div class="form-group d-flex align-items-center"> <!-- Utilisation de Flexbox -->
+                    <div class="qtagselect isw360 mr-2"> <!-- Ajout d'une marge à droite -->
+                        <select id="OM_JTSD" name="name_select_tags" class="qtagselect__select" multiple>
+                        {% for row in data_cours_non_attribues %}
+                            <option value="{{ row.Id_cours }}" name="name_tags_non_attribues_html" class="isblue">{{ row.Titre }}</option>
+                        {% endfor %}
+                        {% for row in data_cours_attribues %}
+                            <option value="{{ row.Id_cours }}" name="name_tags_attribues_html" class="ispurple" selected>{{ row.Titre }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="btn">
+                    <input type="submit" form="form_tags_select_confirm" class="btn btn-info" value="Modifier">
+                </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block javascript %}
+<script>
+    $(document).ready(function () {
+        $('.qtagselect__select').tagselect({
+            'maxTag': 100,
+            'tagMessage': '100 tags au max !'
+        });
+    });
+</script>
+{% endblock %}

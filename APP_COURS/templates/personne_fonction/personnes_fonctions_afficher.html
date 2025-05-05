@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% block title %} Afficher Personnes & Fonction {% endblock %}
+{% block body %}
+<div class="container">
+    <div class="table-container">
+        <div class="col-md-12">
+            <h2>Personnes avec leur Fonction</h2>
+            <a class="btn btn-success mb-3" href="{{ url_for('personnes_ajouter_wtf') }}" role="button">Ajouter une personne</a>
+            <table class="table table-bordered table-sm">
+                {% if data %}
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nom</th>
+                        <th>Prénom</th>
+                        <th>Date de Naissance</th>
+                        <th>Numéro AVS</th>
+                        <th>Sexe</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in data %}
+                    <tr class = "btn-user1">
+                        <td>{{ row.Id_personne }}</td>
+                        <td><h6>{{ row.Nom }}</h6></td>
+                        <td><h6>{{ row.Prenom }}</h6></td>
+                        <td><h9>{{ row.Date_naissance|default("Non spécifié", True) }}</h9></td>
+                        <td><h9>{{ row.NumeroAVS|default("Non spécifié", True) }}</h9></td>
+                        <td><h6>{{ row.Sexe }}</h6></td>
+                        <td>
+                            <a class="btn btn-warning" href="{{ url_for('personne_update_wtf', id_personne_btn_edit_html=row.Id_personne) }}">Edit</a>
+                            <a class="btn btn-danger" href="{{ url_for('personne_delete_wtf', id_personne_btn_delete_html=row.Id_personne) }}">Delete</a>
+                        </td>
+                    </tr>
+                    <!-- Ligne pour les fonctions -->
+                    <tr>
+                        <td colspan="6">
+                           <a class="btn-user1">Fonctions </a>
+                            <ul>
+                                {% if row.fonctions %}
+                                    {% for fonction in row.fonctions %}
+                                <a class ="btn-mini">{{ fonction.Type_fonction }} (du {{ fonction.Date_debut|default("Date non spécifiée", True) }} au {{ fonction.Date_fin|default("Date non spécifiée", True) }})</a>
+                                    {% endfor %}
+                                {% else %}
+                                    <a class ="btn-mini">Aucune fonction attribuée</a>
+                                {% endif %}
+                            </ul>
+                        </td>
+                        <td>
+                            <a class="btn btn-info" href="{{ url_for('edit_personne_fonction_selected', id_personne_fonctions_edit_html=row.Id_personne) }}">Modifier fonctions</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+                {% else %}
+                <tbody>
+                    <tr>
+                        <td colspan="7">Aucune donnée disponible.</td>
+                    </tr>
+                </tbody>
+                {% endif %}
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

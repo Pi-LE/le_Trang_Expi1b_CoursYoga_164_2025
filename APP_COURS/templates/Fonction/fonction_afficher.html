@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block title %} Afficher FONCTIONS {% endblock %}
+{% block body %}
+<div class="container">
+    <div class="table-container">
+        <div class="col-md-12">
+            <h2>Fonctions</h2>
+            <!-- Bouton Ajouter placé en dehors du tableau pour ajouter une nouvelle fonction -->
+            <a class="btn btn-success mb-3" href="{{ url_for('fonction_ajouter') }}" role="button">Ajouter une fonction</a>
+            <table class="table table-bordered table-sm">
+                {% if data %}
+                <thead>
+                    <tr>
+                        <th class="align-middle">ID</th>
+                        <th class="align-middle">Type de fonction</th>
+                        <!-- En-tête pour les options -->
+                        <th class="align-middle">Options</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in data %}
+                    <tr class ="btn-user2">
+                        <td class="align-middle">{{ row.ID_Fonction }}</td>
+                        <td class="align-middle">{{ row.Type_fonction }}</td>
+                        <td class="text-center align-middle">
+                            <!-- Boutons Edit et Delete pour chaque fonction -->
+                            <a class="btn btn-warning" href="{{ url_for('fonction_update', id_fonction_btn_edit_html=row.ID_Fonction) }}" role="button">Edit</a>
+                            <a class="btn btn-danger" href="{{ url_for('fonction_delete', id_fonction_btn_delete_html=row.ID_Fonction) }}" role="button">Delete</a>
+                        </td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td colspan="3">Aucune fonction trouvée.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+                {% else %}
+                <tbody>
+                    <tr>
+                        <td colspan="3">Aucune donnée disponible.</td>
+                    </tr>
+                </tbody>
+                {% endif %}
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

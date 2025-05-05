@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% block title %} Modifier Un Cours {% endblock %}
+{% block body %}
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+            <h2>
+                Modifier Un Cours
+            </h2><br>
+			<form action="" method="POST" novalidate>
+				<!-- Protection contre les attaques Cross-Site Request Forgery (CSRF) -->
+				 {{ form_update.hidden_tag() }}
+                <div class="form-group">
+                    <p>
+                        {{ form_update.titre_cours_Uwtf.label }}<br>
+                        {{ form_update.titre_cours_Uwtf(size=32) }}<br>
+                        {% for error in form_update.titre_cours_Uwtf.errors %}
+                            <span style="color: red;">[{{ error }}]</span>
+                        {% endfor %}
+                    </p>
+                    <p>
+                        {{ form_update.niveau_cours_Uwtf.label }}<br>
+                        {{ form_update.niveau_cours_Uwtf(class="form-control") }}<br>
+                        {% for error in form_update.niveau_cours_Uwtf.errors %}
+                            <span style="color: red;">[{{ error }}]</span>
+                        {% endfor %}
+                    </p>
+                    <p>
+                        {{ form_update.session_cours_Uwtf.label }}<br>
+                        {{ form_update.session_cours_Uwtf(size=32) }}<br>
+                        {% for error in form_update.session_cours_Uwtf.errors %}
+                            <span style="color: red;">[{{ error }}]</span>
+                        {% endfor %}
+                    </p>
+                    <p>
+                        {{ form_update.prix_par_session_cours_Uwtf.label }}<br>
+                        {{ form_update.prix_par_session_cours_Uwtf(size=32) }}<br>
+                        {% for error in form_update.prix_par_session_cours_Uwtf.errors %}
+                            <span style="color: red;">[{{ error }}]</span>
+                        {% endfor %}
+                    </p>
+                    <p>
+                        {{ form_update.description_cours_Uwtf.label }}<br>
+                        {{ form_update.description_cours_Uwtf(class="form-control") }}<br>
+                        {% for error in form_update.description_cours_Uwtf.errors %}
+                            <span style="color: red;">[{{ error }}]</span>
+                        {% endfor %}
+                    </p>
+                    <p>
+                        {{ form_update.affiche_cours_Uwtf.label }}<br>
+                        {{ form_update.affiche_cours_Uwtf(class="form-control") }}<br>
+                        {% for error in form_update.affiche_cours_Uwtf.errors %}
+                            <span style="color: red;">[{{ error }}]</span>
+                        {% endfor %}
+                    </p>
+                </div>
+                {{ form_update.submit(class="btn btn-info") }}
+            </form>
+		</div>
+	</div>
+</div>
+{% endblock %}
+

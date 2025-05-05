@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+{% block title %}Effacer une personne{% endblock %}
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Effacer une personne</h2>
+            <form action="" method="POST" novalidate>
+                <!-- Protection contre les attaques Cross-Site Request Forgery (CSRF) -->
+                {{ form_delete.hidden_tag() }}
+                <!-- Information sur la personne -->
+                <table class="table table-bordered table-sm">
+                    {% if data_personne_del %}
+                    <thead>
+                        <tr class="btn-user">
+                            <th>Id</th>
+                            <th>Nom</th>
+                            <th>Prénom</th>
+                            <th>Date de naissance</th>
+                            <th>Numéro AVS</th>
+                            <th>Sexe</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for personne in data_personne_del %}
+                        <tr class ="btn-user1">
+                            <td>{{ personne.Id_personne }}</td>
+                            <td>{{ personne.Nom }}</td>
+                            <td>{{ personne.Prenom }}</td>
+                            <td>{{ personne.Date_naissance|default("", True) }}</td>
+                            <td>{{ personne.NumeroAVS }}</td>
+                            <td>{{ personne.Sexe }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                    {% else %}
+                    <tbody>
+                        <tr><td colspan="6">Aucune information disponible pour cette personne.</td></tr>
+                    </tbody>
+                    {% endif %}
+                </table>
+                {% if associations %}
+                <h4>Cette personne est associée aux éléments suivants </h4>
+                <div class="p-3">
+                <table class="table-free">
+                    <thead>
+                        <tr>
+                            <th>Fonction</th>
+                            <th>Cours Inscrit</th>
+                            <th>Date d'inscription</th>
+                            <th>Statut de paiement</th>
+                            <th>Raison d'annulation</th>
+                            <th>Enseignement Cours</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for assoc in associations %}
+                            <tr>
+                                <td>{{ assoc.Type_fonction }}</td>
+                                <td>{{ assoc.Titre_cours }}</td>
+                                <td>{{ assoc.Date_inscription}}</td>
+                                <td>{{ assoc.Statut_paiement }}</td>
+                                <td>{{ assoc.Raison_annulation }}</td>
+                                <td>{{ assoc.Description_enseignement }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                </div>
+            {% else %}
+                <h4>Cette personne n'est associée à aucun élément.</h4>
+            {% endif %}
+
+                            <!-- Boutons du formulaire -->
+                <div class="form-group">
+                    {{ form_delete.submit_btn_conf_del(class="btn btn-info") }}
+                    {% if btn_submit_del %}
+                        {{ form_delete.submit_btn_del(class="btn btn-danger") }}
+                    {% endif %}
+                    {{ form_delete.submit_btn_annuler(class="btn btn-warning") }}
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

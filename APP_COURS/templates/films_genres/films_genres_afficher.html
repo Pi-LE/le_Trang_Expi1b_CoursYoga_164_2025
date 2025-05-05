@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% block title %} Afficher FILMS {% endblock %}
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h2>FILMS</h2>
+            <!-- Bouton Ajouter pour ajouter un nouveau film, placé en haut -->
+            <a class="btn btn-success mb-3" href="{{ url_for('avertissement_sympa_pour_geeks') }}" role="button">Ajouter un film</a>
+            <table class="table table-bordered table-sm">
+                {% if data %}
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Nom</th>
+                        <th>Durée</th>
+                        <th>Date de sortie</th>
+                        <th>Description</th>
+                        <th>Affiche</th>
+                        <th>Actions</th> <!-- Colonne ajoutée pour les actions Edit et Delete -->
+                    </tr>
+                </thead>
+                {% for row in data %}
+                <tbody>
+                    <tr>
+                        <td class="align-middle">{{ row.id_film }}</td>
+                        <td class="align-middle">{{ row.nom_film }}</td>
+                        <td class="align-middle">{{ row.duree_film|default("", True) }}</td>
+                        <td class="align-middle">{{ row.date_sortie_film|default("", True) }}</td>
+                        <td class="align-middle">{{ row.description_film|default("", True) }}</td>
+                        <td class="align-middle">
+                            <img src="{{ row.cover_link_film|default(None, True) }}" style="width:150px; max-height:auto;" alt="Image indisponible">
+                        </td>
+                        <!-- Extrait du fichier HTML pour les films -->
+                        <td class="text-center align-middle">
+                            <a class="btn btn-warning action-button" href="{{ url_for('film_update_wtf', id_film_btn_edit_html=row.id_film) }}" role="button">Edit</a>
+                            <a class="btn btn-danger action-button" href="{{ url_for('film_delete_wtf', id_film_btn_delete_html=row.id_film ) }}" role="button">Delete</a>
+                        </td>
+                    </tr>
+                    <!-- Ligne supplémentaire pour le bouton Modifier et l'affichage des genres -->
+                    <tr>
+                        <td class="align-middle">
+                            <a class="btn btn-info btn-sm" href="{{ url_for('edit_genre_film_selected', id_film_genres_edit_html=row.id_film) }}" role="button">Modifier</a>
+                        </td>
+                        <td class="align-middle" colspan="6">
+                            {{ row.GenresFilms|default("PAS DE GENRES", True) }}
+                        </td>
+                    </tr>
+                </tbody>
+                {% else %}
+                <tbody>
+                    <tr>
+                        <td colspan="7">Aucun film trouvé.</td>
+                    </tr>
+                </tbody>
+                {% endfor %}
+                {% else %}
+                <tbody>
+                    <tr>
+                        <td colspan="7">Aucune donnée disponible.</td>
+                    </tr>
+                </tbody>
+                {% endif %}
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
