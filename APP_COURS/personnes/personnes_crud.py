@@ -108,7 +108,6 @@ def personnes_ajouter_wtf():
     return render_template("personnes/personnes_ajouter_wtf.html", form=form)
 
 """
-    Auteur : OM 2021.03.22
     Route Update
 """
 @app.route("/personne_update", methods=["GET", "POST"])
@@ -183,10 +182,10 @@ def personne_delete_wtf():
                 dct = {"value_id_personne": id_personne_delete}
                 deletes = [
                     ("DELETE FROM t_avoirfonction WHERE FK_Personne = %(value_id_personne)s"),
-                    ("DELETE FROM T_InscrireCours WHERE FK_Personne = %(value_id_personne)s"),
-                    ("DELETE FROM T_EnseignerCours WHERE FK_Personne = %(value_id_personne)s"),
-                    ("DELETE FROM t_payement WHERE FK_Inscrirecours IN (SELECT ID_InscrireCours FROM T_InscrireCours WHERE FK_Personne = %(value_id_personne)s)"),
-                    ("DELETE FROM t_annulation WHERE FK_Inscrirecours IN (SELECT ID_InscrireCours FROM T_InscrireCours WHERE FK_Personne = %(value_id_personne)s)"),
+                    ("DELETE FROM t_inscrirecours WHERE FK_Personne = %(value_id_personne)s"),
+                    ("DELETE FROM t_enseignercours WHERE FK_Personne = %(value_id_personne)s"),
+                    ("DELETE FROM t_payement WHERE FK_Inscrirecours IN (SELECT ID_InscrireCours FROM t_inscrirecours WHERE FK_Personne = %(value_id_personne)s)"),
+                    ("DELETE FROM t_annulation WHERE FK_Inscrirecours IN (SELECT ID_InscrireCours FROM t_inscrirecours WHERE FK_Personne = %(value_id_personne)s)"),
                     ("DELETE FROM t_personne WHERE Id_personne = %(value_id_personne)s"),
                 ]
                 with DBconnection() as mconn_bd:
