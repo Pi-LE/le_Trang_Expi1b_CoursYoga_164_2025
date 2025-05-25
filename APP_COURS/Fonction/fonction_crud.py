@@ -231,7 +231,7 @@ def fonction_delete():
             # Requête qui affiche toutes les fonctions associées à la fonction que l'utilisateur veut effacer
             str_sql_fonctions_fonction_delete = """SELECT ID_avoirFonction,f.ID_Fonction, f.Type_fonction, 
                                                     p.Id_personne, p.Nom, p.Prenom, p.Date_naissance, p.NumeroAVS
-                                                FROM t_avoirFonction AS AF
+                                                FROM t_avoirfonction AS AF
                                                 INNER JOIN t_personne p ON AF.fk_personne = p.Id_personne
                                                 INNER JOIN t_fonction AS f ON AF.fk_fonction = f.ID_Fonction
                                                 WHERE fk_fonction = %(value_id_fonction)s"""
